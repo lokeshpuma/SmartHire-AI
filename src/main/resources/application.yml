@@ -1,0 +1,67 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: resume-screening-engine
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 30MB
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 25
+
+  # Default datasource: H2 in-memory with PostgreSQL syntax compatibility
+  datasource:
+    url: jdbc:h2:mem:resumedb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ""
+  h2:
+    console:
+      enabled: false
+
+# Application-specific configuration
+app:
+  jwt:
+    secret: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
+    expiration-ms: 86400000 # 24 hours
+  storage:
+    upload-dir: "./storage/resumes"
+    max-file-size-bytes: 15728640 # 15MB
+    max-pages: 25
+  security:
+    rate-limit:
+      login-capacity: 10
+      login-refill-seconds: 60
+      upload-capacity: 30
+      upload-refill-seconds: 60
+  matching:
+    weights:
+      required: 0.45
+      preferred: 0.20
+      semantic: 0.20
+      evidence: 0.15
+  embedding:
+    model-name: "tfidf-dense-normalized-v1"
+    dimension: 128
+  taxonomy:
+    version: "1.0.0"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

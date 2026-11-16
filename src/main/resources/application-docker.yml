@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: docker
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:resumedb}
+    username: ${DB_USER:resume_user}
+    password: ${DB_PASSWORD:resume_password}
+    driver-class-name: org.postgresql.Driver
+
+app:
+  storage:
+    upload-dir: "/app/storage/resumes"
