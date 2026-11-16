@@ -45,6 +45,57 @@
             --radius-sm: 6px;
             --radius: 10px;
             --radius-lg: 14px;
+            --input-bg: #ffffff;
+            --dropdown-bg: #ffffff;
+            --dropdown-border: #e2e8f0;
+            --dropdown-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+            --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --hero-text: #f8fafc;
+            --chip-bg: #f1f5f9;
+            --table-hover: #f8fafc;
+            --modal-bg: #ffffff;
+            --modal-overlay: rgba(15, 23, 42, 0.6);
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-hover: #60a5fa;
+            --primary-light: rgba(59, 130, 246, 0.15);
+            --primary-subtle: rgba(59, 130, 246, 0.25);
+            --accent: #818cf8;
+            --accent-light: rgba(99, 102, 241, 0.15);
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-subtle: #1a2233;
+            --border: #283548;
+            --border-hover: #3d4f6a;
+            --text-main: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --success: #22c55e;
+            --success-bg: rgba(34, 197, 94, 0.15);
+            --warning: #f59e0b;
+            --warning-bg: rgba(245, 158, 11, 0.15);
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.15);
+            --info: #38bdf8;
+            --info-bg: rgba(56, 189, 248, 0.15);
+            --purple: #a855f7;
+            --purple-bg: rgba(168, 85, 247, 0.15);
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+            --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 14px 28px -4px rgba(0, 0, 0, 0.65);
+            --input-bg: #162032;
+            --dropdown-bg: #141c2c;
+            --dropdown-border: #283548;
+            --dropdown-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+            --hero-bg: linear-gradient(135deg, #0b1120 0%, #161b33 100%);
+            --hero-text: #f8fafc;
+            --chip-bg: #1c2638;
+            --table-hover: #151e2d;
+            --modal-bg: #111827;
+            --modal-overlay: rgba(0, 0, 0, 0.75);
         }
 
         * {
@@ -64,27 +115,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Top SafeGuard Banner */
-        .ai-safeguard-banner {
-            background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
-            color: #f8fafc;
-            font-size: 0.8rem;
-            padding: 8px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-        .ai-safeguard-banner .badge {
-            background: #2563eb;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.72rem;
-            letter-spacing: 0.04em;
-            margin-right: 8px;
-        }
+        
 
         /* Top Header */
         header.app-header {
@@ -893,6 +924,188 @@
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
+    
+        /* Smooth Theme Transitions */
+        body, header, nav, .card, .modal-box, .btn, .form-control {
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+            padding: 0;
+            flex-shrink: 0;
+        }
+        .theme-toggle-btn:hover {
+            color: var(--text-main);
+            background: var(--surface-subtle);
+            border-color: var(--border-hover);
+            transform: scale(1.05);
+        }
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: transform 0.25s ease;
+        }
+
+        /* Profile Menu & Dropdown */
+        .profile-menu-container {
+            position: relative;
+        }
+        .profile-trigger-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 12px 4px 5px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .profile-trigger-btn:hover {
+            background: var(--surface-subtle);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-xs);
+        }
+        .profile-dropdown-card {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 320px;
+            background: var(--dropdown-bg);
+            border: 1px solid var(--dropdown-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--dropdown-shadow);
+            padding: 16px;
+            z-index: 100;
+            display: none;
+            animation: dropdownFade 0.15s ease-out;
+        }
+        .profile-dropdown-card.active {
+            display: block;
+        }
+        @keyframes dropdownFade {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .role-switch-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            background: var(--surface-subtle);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+            text-align: left;
+        }
+        .role-switch-btn:hover {
+            border-color: var(--border-hover);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        .role-switch-btn .role-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Clean Tabbar Styles */
+        nav.app-tabs {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 28px;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            position: sticky;
+            top: 68px;
+            z-index: 40;
+            box-shadow: var(--shadow-xs);
+        }
+        .tab-btn {
+            padding: 11px 16px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 6px 0;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: var(--surface-subtle);
+        }
+        .tab-btn.active {
+            color: var(--primary);
+            background: var(--primary-light);
+            font-weight: 700;
+        }
+        .tab-btn .tab-badge {
+            background: var(--surface-subtle);
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            padding: 1px 7px;
+            border-radius: 9999px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+        }
+        .tab-btn.active .tab-badge {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+        .tab-btn.tab-restricted {
+            opacity: 0.7;
+        }
+
+        /* Ensure form controls and dropzones respect dark theme */
+        .form-control {
+            background: var(--input-bg);
+            color: var(--text-main);
+        }
+        .careers-hero {
+            background: var(--hero-bg);
+            color: var(--hero-text);
+        }
+        .careers-hero h1 {
+            color: var(--hero-text);
+        }
+        .careers-hero p {
+            color: rgba(255, 255, 255, 0.82);
+        }
+        .data-table tr:hover td {
+            background: var(--table-hover);
+        }
+
     </style>
 </head>
 <body>
@@ -900,16 +1113,7 @@
     <!-- Toast Notifications Container -->
     <div id="toastContainer"></div>
 
-    <!-- Responsible AI / Safeguards Banner -->
-    <div class="ai-safeguard-banner">
-        <div>
-            <span class="badge">DECISION-SUPPORT PLATFORM</span>
-            <strong>Human-in-the-Loop:</strong> All scores and requirement matchings are advisory aids for recruiters. Candidates are never automatically rejected or hired.
-        </div>
-        <div>
-            <span style="opacity: 0.9; font-size: 0.78rem;">Protected characteristics strictly excluded from features</span>
-        </div>
-    </div>
+    
 
     <!-- Application Topbar Header -->
     <header class="app-header">
@@ -919,7 +1123,7 @@
             </div>
             <div class="brand-title">
                 <span>SmartHire AI</span>
-                <span>INTELLIGENT SCREENING &amp; CAREERS</span>
+                <span>INTELLIGENT HIRING PLATFORM</span>
             </div>
         </a>
 
@@ -931,27 +1135,97 @@
             </button>
             <button id="btnSwitchEnterprise" class="portal-switch-btn" onclick="activateEnterprisePortal()">
                 <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
-                <span>Recruiter &amp; Manager Portal</span>
+                <span>Recruiter &amp; Manager Hub</span>
             </button>
         </div>
 
-        <div class="user-nav" id="userNavSection">
+        <div class="user-nav" id="userNavSection" style="display:flex; align-items:center; gap:10px;">
+            <!-- Theme Toggle Button (Light/Dark) -->
+            <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
+                <svg id="themeIconSun" viewBox="0 0 24 24" style="display:none;"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+                <svg id="themeIconMoon" viewBox="0 0 24 24"><path d="M12.3 2a10 10 0 0 0-.19 20 10.04 10.04 0 0 0 9.95-8.83 1 1 0 0 0-1.19-1.12 7.99 7.99 0 0 1-8.57-10 1 1 0 0 0-.9-1.05z"/></svg>
+            </button>
+
+            <!-- Mode Pill -->
             <span id="runtimeModePill" class="demo-mode-pill" style="display: none;">
-                <span class="dot"></span> <span id="runtimeModeText">GitHub Pages Mode</span>
+                <span class="dot"></span> <span id="runtimeModeText">Spring Boot 3.3.5 / Java 21</span>
             </span>
 
-            <div id="userInfoDisplay" style="display: none; align-items: center; gap: 12px;">
-                <div class="workspace-tag">
-                    <span id="navWorkspaceName">Acme Tech Workspace</span>
-                </div>
-                <div class="user-profile-badge">
+            <!-- Unauthenticated: Sign In Button -->
+            <button id="userSignInBtn" class="btn btn-primary btn-sm" onclick="openLoginModal()" style="display: inline-flex;">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span>Sign In</span>
+            </button>
+
+            <!-- Authenticated: User Profile Trigger & Dropdown Menu -->
+            <div id="userProfileContainer" class="profile-menu-container" style="display: none;">
+                <button id="userProfileTrigger" class="profile-trigger-btn" onclick="toggleProfileMenu(event)">
                     <div class="user-avatar" id="navAvatar">SR</div>
-                    <div style="display: flex; flex-direction: column;">
-                        <span id="navUserName" style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">Sarah Recruiter</span>
-                        <span id="navRoleBadge" class="role-pill role-recruiter" style="align-self: flex-start; margin-top: 2px;">RECRUITER</span>
+                    <div style="display: flex; flex-direction: column; text-align: left; margin: 0 4px;">
+                        <span id="navUserName" style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Sarah Recruiter</span>
+                        <span id="navRoleBadge" class="role-pill role-recruiter" style="font-size: 0.65rem; padding: 1px 6px; margin-top: 2px;">RECRUITER</span>
+                    </div>
+                    <svg style="width: 14px; height: 14px; fill: var(--text-muted); margin-left: 2px;" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+
+                <!-- Floating Dropdown Menu -->
+                <div id="userProfileDropdown" class="profile-dropdown-card">
+                    <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+                        <div class="user-avatar" id="dropdownAvatar" style="width: 42px; height: 42px; font-size: 1rem;">SR</div>
+                        <div style="overflow: hidden; flex: 1;">
+                            <div id="dropdownUserName" style="font-weight: 700; font-size: 0.95rem; color: var(--text-main); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">Sarah Recruiter</div>
+                            <div id="dropdownUserEmail" style="font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">recruiter@example.com</div>
+                            <div id="dropdownWorkspace" style="font-size: 0.75rem; color: var(--primary); font-weight: 600; margin-top: 2px;">Acme Tech Workspace</div>
+                        </div>
+                    </div>
+
+                    <!-- Role Permissions Summary -->
+                    <div style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Active Role</span>
+                            <span id="dropdownRoleTag" class="role-pill role-recruiter">RECRUITER</span>
+                        </div>
+                        <p id="dropdownRoleDesc" style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4;">
+                            Authorized for resume ingestion, pipeline screening, and advancing candidates to Recruiter Screen &amp; Technical Round.
+                        </p>
+                    </div>
+
+                    <!-- Quick Switch Role / Persona -->
+                    <div style="padding: 10px 0; border-bottom: 1px solid var(--border);">
+                        <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px;">Switch Role Persona</span>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <button class="role-switch-btn" onclick="switchRole('RECRUITER')">
+                                <span class="role-dot" style="background:#3b82f6;"></span>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 600; font-size: 0.82rem;">Sarah Recruiter</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Recruiter (Upload &amp; Screen)</div>
+                                </div>
+                            </button>
+                            <button class="role-switch-btn" onclick="switchRole('HIRING_MANAGER')">
+                                <span class="role-dot" style="background:#f59e0b;"></span>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 600; font-size: 0.82rem;">Alex HiringManager</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Hiring Manager (Final &amp; Offer)</div>
+                                </div>
+                            </button>
+                            <button class="role-switch-btn" onclick="switchRole('ADMINISTRATOR')">
+                                <span class="role-dot" style="background:#8b5cf6;"></span>
+                                <div style="text-align: left;">
+                                    <div style="font-weight: 600; font-size: 0.82rem;">System Administrator</div>
+                                    <div style="font-size: 0.7rem; color: var(--text-muted);">Admin (Audit, Taxonomy, All)</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div style="padding-top: 10px; display: flex; justify-content: flex-end;">
+                        <button class="btn btn-secondary btn-sm" onclick="handleLogout()" style="width: 100%; justify-content: center;">
+                            <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                            <span>Sign Out</span>
+                        </button>
                     </div>
                 </div>
-                <button class="btn btn-secondary btn-sm" onclick="handleLogout()" style="margin-left: 8px;">Sign Out</button>
             </div>
         </div>
     </header>
@@ -964,23 +1238,25 @@
         </button>
         <button class="tab-btn" data-screen="screen-jobs">
             <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
-            <span>Jobs &amp; Requirements (<span id="tabJobCount">10</span>)</span>
+            <span>Jobs &amp; Requirements</span>
+            <span class="tab-badge" id="tabJobCount">10</span>
         </button>
-        <button class="tab-btn" data-screen="screen-upload">
+        <button class="tab-btn" data-screen="screen-upload" id="navTabUpload">
             <svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
             <span>Batch Upload</span>
         </button>
         <button class="tab-btn" data-screen="screen-candidates">
             <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
             <span>Candidate Review Queue</span>
+            <span class="tab-badge" id="tabCandidateCount">1</span>
         </button>
         <button class="tab-btn" data-screen="screen-reports">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
             <span>Reports &amp; Analytics</span>
         </button>
-        <button class="tab-btn" data-screen="screen-admin">
-            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            <span>Admin &amp; Audit</span>
+        <button class="tab-btn" data-screen="screen-admin" id="navTabAdmin">
+            <svg id="navAdminIcon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            <span id="navAdminLabel">Admin &amp; Audit</span>
         </button>
     </nav>
 
@@ -1280,6 +1556,14 @@
             </div>
 
             <div class="card">
+
+                <!-- Manager Upload Advisory -->
+                <div id="managerUploadNotice" style="display: none; padding: 14px 18px; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 18px; align-items: center; gap: 12px;">
+                    <svg style="width: 22px; height: 22px; fill: #f59e0b; flex-shrink: 0;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <div style="font-size: 0.86rem; color: var(--text-secondary);">
+                        <strong>Hiring Manager Mode:</strong> Resume ingestion and bulk parsing are primarily managed by Recruiters. You may test uploads here, or evaluate candidates in your assigned pipeline rounds in the <a href="#" onclick="switchTab('screen-candidates')" style="color: var(--primary); font-weight: 600;">Candidate Review Queue</a>.
+                    </div>
+                </div>
                 <div class="form-group" style="max-width: 440px;">
                     <label class="form-label" for="uploadJobSelect">Associate With Job Description (Optional)</label>
                     <select id="uploadJobSelect" class="form-control">
@@ -1390,6 +1674,14 @@
             </div>
 
             <div class="card">
+
+                <!-- Manager Upload Advisory -->
+                <div id="managerUploadNotice" style="display: none; padding: 14px 18px; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 18px; align-items: center; gap: 12px;">
+                    <svg style="width: 22px; height: 22px; fill: #f59e0b; flex-shrink: 0;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <div style="font-size: 0.86rem; color: var(--text-secondary);">
+                        <strong>Hiring Manager Mode:</strong> Resume ingestion and bulk parsing are primarily managed by Recruiters. You may test uploads here, or evaluate candidates in your assigned pipeline rounds in the <a href="#" onclick="switchTab('screen-candidates')" style="color: var(--primary); font-weight: 600;">Candidate Review Queue</a>.
+                    </div>
+                </div>
                 <div class="form-group" style="max-width: 440px;">
                     <label class="form-label" for="reportJobSelect">Select Requisition for Summary Analysis</label>
                     <select id="reportJobSelect" class="form-control" onchange="loadJobReport()">
@@ -1407,6 +1699,20 @@
         <!-- 8. ADMIN & AUDIT SCREEN                        -->
         <!-- ============================================== -->
         <section id="screen-admin" class="screen-view">
+            <!-- Administrator Access Gate for Non-Admins -->
+            <div id="adminRestrictedNotice" style="display: none; padding: 40px 24px; text-align: center; max-width: 600px; margin: 40px auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <svg style="width: 28px; height: 28px; fill: currentColor;" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                </div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Administrator Access Required</h3>
+                <p class="text-sm text-secondary" style="margin-bottom: 20px; line-height: 1.6;">
+                    Access to the immutable SHA-256 audit trail and canonical skill taxonomy configuration requires <strong>ADMINISTRATOR</strong> privileges. You are currently logged in with the <span id="restrictedRoleLabel" class="role-pill role-recruiter">RECRUITER</span> role.
+                </p>
+                <button class="btn btn-primary" onclick="switchRole('ADMINISTRATOR')">Switch to Administrator Account</button>
+            </div>
+
+            <div id="adminContentBody">
+    
             <div class="card-header">
                 <div>
                     <h2>System Administration &amp; Audit Trail</h2>
@@ -1441,9 +1747,73 @@
                     </table>
                 </div>
             </div>
-        </section>
+        
+            </div></section>
 
     </main>
+
+    
+    <!-- Fast Login Modal -->
+    <div id="loginModal" class="modal-backdrop">
+        <div class="modal-box" style="max-width: 480px;">
+            <div class="modal-header">
+                <div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 2px;">Sign In to Enterprise Workspace</h3>
+                    <p class="text-sm text-muted">Select a persona or enter your credentials</p>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 18px;">
+                    <span class="form-label" style="margin-bottom: 8px;">Instant 1-Click Role Sign In:</span>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <button type="button" class="btn btn-secondary" style="justify-content: flex-start; text-align: left; padding: 10px 14px;" onclick="quickLoginAndClose('recruiter@example.com', 'password123')">
+                            <span class="user-avatar" style="width: 28px; height: 28px; background: #3b82f6; font-size: 0.75rem;">SR</span>
+                            <div style="flex: 1; margin-left: 8px;">
+                                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main);">Sarah Recruiter</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">recruiter@example.com · Recruiter Role</div>
+                            </div>
+                            <span class="role-pill role-recruiter">RECRUITER</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" style="justify-content: flex-start; text-align: left; padding: 10px 14px;" onclick="quickLoginAndClose('manager@example.com', 'password123')">
+                            <span class="user-avatar" style="width: 28px; height: 28px; background: #f59e0b; font-size: 0.75rem;">AH</span>
+                            <div style="flex: 1; margin-left: 8px;">
+                                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main);">Alex HiringManager</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">manager@example.com · Hiring Manager Role</div>
+                            </div>
+                            <span class="role-pill role-manager">MANAGER</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" style="justify-content: flex-start; text-align: left; padding: 10px 14px;" onclick="quickLoginAndClose('admin@example.com', 'password123')">
+                            <span class="user-avatar" style="width: 28px; height: 28px; background: #8b5cf6; font-size: 0.75rem;">SA</span>
+                            <div style="flex: 1; margin-left: 8px;">
+                                <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main);">System Administrator</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">admin@example.com · Admin Role</div>
+                            </div>
+                            <span class="role-pill role-admin">ADMIN</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div style="position: relative; text-align: center; margin: 20px 0;">
+                    <hr style="border: none; border-top: 1px solid var(--border);">
+                    <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--surface); padding: 0 10px; font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">OR SIGN IN WITH EMAIL</span>
+                </div>
+
+                <form onsubmit="handleModalLoginSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="modalLoginEmail" class="form-control" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="modalLoginPassword" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 11px;">Sign In to Workspace</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <!-- ============================================== -->
     <!-- MODALS                                         -->
@@ -1930,7 +2300,219 @@
         // ==========================================
         // 2. INITIALIZATION & DUAL-MODE DETECTION
         // ==========================================
+        
+        // ==========================================
+        // THEME MANAGEMENT (LIGHT / DARK MODE)
+        // ==========================================
+        function initTheme() {
+            const savedTheme = localStorage.getItem('smarthire_theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+            localStorage.setItem('smarthire_theme', nextTheme);
+            showToast(`Switched to ${nextTheme.charAt(0).toUpperCase() + nextTheme.slice(1)} Mode`);
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            const sunIcon = document.getElementById('themeIconSun');
+            const moonIcon = document.getElementById('themeIconMoon');
+            if (theme === 'dark') {
+                if (sunIcon) sunIcon.style.display = 'block';
+                if (moonIcon) moonIcon.style.display = 'none';
+            } else {
+                if (sunIcon) sunIcon.style.display = 'none';
+                if (moonIcon) moonIcon.style.display = 'block';
+            }
+        }
+
+        // ==========================================
+        // USER PROFILE & DROPDOWN MANAGEMENT
+        // ==========================================
+        function toggleProfileMenu(e) {
+            if (e) e.stopPropagation();
+            const dropdown = document.getElementById('userProfileDropdown');
+            if (dropdown) dropdown.classList.toggle('active');
+        }
+
+        function closeProfileMenu() {
+            const dropdown = document.getElementById('userProfileDropdown');
+            if (dropdown) dropdown.classList.remove('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            const container = document.getElementById('userProfileContainer');
+            if (container && !container.contains(e.target)) {
+                closeProfileMenu();
+            }
+        });
+
+        // ==========================================
+        // FAST 1-CLICK ROLE SWITCHER
+        // ==========================================
+        async function switchRole(newRole) {
+            closeProfileMenu();
+
+            let name = 'Sarah Recruiter';
+            let email = 'recruiter@example.com';
+            if (newRole === 'ADMINISTRATOR') {
+                name = 'System Administrator';
+                email = 'admin@example.com';
+            } else if (newRole === 'HIRING_MANAGER') {
+                name = 'Alex HiringManager';
+                email = 'manager@example.com';
+            }
+
+            // If connected to live Spring Boot backend, authenticate to get valid token
+            if (!isMockMode) {
+                try {
+                    const res = await fetch('/api/v1/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email, password: 'password123' })
+                    });
+                    if (res.ok) {
+                        const json = await res.json();
+                        currentUser = json.data;
+                        token = json.data.token;
+                        localStorage.setItem('smarthire_token', token);
+                        localStorage.setItem('smarthire_user', JSON.stringify(currentUser));
+                        updateUIForRole();
+                        showToast(`Switched active role to: ${currentUser.name} (${currentUser.role})`);
+                        refreshCurrentScreen();
+                        return;
+                    }
+                } catch (e) {
+                    console.warn("Live login failed, using local role switch:", e);
+                }
+            }
+
+            // Local fallback
+            currentUser = {
+                name: name,
+                email: email,
+                role: newRole,
+                workspaceName: 'Acme Tech Workspace',
+                token: 'mock-token-' + newRole
+            };
+            token = currentUser.token;
+            localStorage.setItem('smarthire_token', token);
+            localStorage.setItem('smarthire_user', JSON.stringify(currentUser));
+            updateUIForRole();
+            showToast(`Switched role to: ${currentUser.name} (${newRole})`);
+            refreshCurrentScreen();
+        }
+
+        function updateUIForRole() {
+            if (!currentUser) {
+                document.getElementById('userSignInBtn').style.display = 'inline-flex';
+                document.getElementById('userProfileContainer').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('userSignInBtn').style.display = 'none';
+            document.getElementById('userProfileContainer').style.display = 'flex';
+
+            // Topbar
+            document.getElementById('navUserName').textContent = currentUser.name;
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('');
+            document.getElementById('navAvatar').textContent = initials;
+            
+            const badge = document.getElementById('navRoleBadge');
+            badge.textContent = currentUser.role === 'HIRING_MANAGER' ? 'MANAGER' : currentUser.role;
+            badge.className = 'role-pill ' + (currentUser.role === 'ADMINISTRATOR' ? 'role-admin' : currentUser.role === 'HIRING_MANAGER' ? 'role-manager' : 'role-recruiter');
+
+            // Dropdown card
+            document.getElementById('dropdownAvatar').textContent = initials;
+            document.getElementById('dropdownUserName').textContent = currentUser.name;
+            document.getElementById('dropdownUserEmail').textContent = currentUser.email || 'user@example.com';
+            document.getElementById('dropdownWorkspace').textContent = currentUser.workspaceName || 'Acme Tech Workspace';
+            
+            const dropdownTag = document.getElementById('dropdownRoleTag');
+            dropdownTag.textContent = currentUser.role;
+            dropdownTag.className = 'role-pill ' + (currentUser.role === 'ADMINISTRATOR' ? 'role-admin' : currentUser.role === 'HIRING_MANAGER' ? 'role-manager' : 'role-recruiter');
+
+            // Role Description
+            const roleDescEl = document.getElementById('dropdownRoleDesc');
+            if (currentUser.role === 'ADMINISTRATOR') {
+                roleDescEl.textContent = "Full platform administrator with authority over candidate pipeline, audit trail, model diagnostics, and canonical taxonomy.";
+            } else if (currentUser.role === 'HIRING_MANAGER') {
+                roleDescEl.textContent = "Authorized for requisition inspection, evaluating technical rounds, advancing to final leadership interview, and extending offers.";
+            } else {
+                roleDescEl.textContent = "Authorized for resume batch upload, candidate intake screening, and advancing to Recruiter Screen & Technical Round.";
+            }
+
+            // Permissions enforcement across tabs
+            const btnCreateJob = document.getElementById('btnCreateJob');
+            if (btnCreateJob) {
+                btnCreateJob.style.display = (currentUser.role === 'HIRING_MANAGER') ? 'none' : 'inline-flex';
+            }
+
+            const adminTab = document.getElementById('navTabAdmin');
+            const adminLabel = document.getElementById('navAdminLabel');
+            if (currentUser.role === 'ADMINISTRATOR') {
+                if (adminTab) adminTab.classList.remove('tab-restricted');
+                if (adminLabel) adminLabel.textContent = "Admin & Audit";
+            } else {
+                if (adminTab) adminTab.classList.add('tab-restricted');
+                if (adminLabel) adminLabel.innerHTML = '🔒 Admin &amp; Audit';
+            }
+
+            // Manager notice in Upload tab
+            const mgrNotice = document.getElementById('managerUploadNotice');
+            if (mgrNotice) {
+                mgrNotice.style.display = (currentUser.role === 'HIRING_MANAGER') ? 'flex' : 'none';
+            }
+        }
+
+        function refreshCurrentScreen() {
+            const activeScreen = document.querySelector('.screen-view.active');
+            if (activeScreen) {
+                const screenId = activeScreen.id;
+                if (screenId === 'screen-dashboard') loadDashboard();
+                if (screenId === 'screen-jobs') loadJobsTable();
+                if (screenId === 'screen-candidates') loadCandidateQueueScreen();
+                if (screenId === 'screen-admin') loadAdminScreen();
+            }
+        }
+
+        // ==========================================
+        // LOGIN MODAL CONTROLS
+        // ==========================================
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        async function quickLoginAndClose(email, password) {
+            closeLoginModal();
+            await loginUser(email, password);
+        }
+
+        async function handleModalLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('modalLoginEmail').value.trim();
+            const password = document.getElementById('modalLoginPassword').value.trim();
+            closeLoginModal();
+            await loginUser(email, password);
+        }
+
         window.addEventListener('DOMContentLoaded', async () => {
+            initTheme();
+            initAuthAndRoles();
             initPortalView();
             await checkBackendHealth();
             renderCareerJobs();
@@ -2381,7 +2963,28 @@
             }
         }
 
+        
+        function initAuthAndRoles() {
+            const savedUser = localStorage.getItem('smarthire_user');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                } catch (e) { currentUser = null; }
+            } else if (token) {
+                currentUser = {
+                    name: 'Sarah Recruiter',
+                    email: 'recruiter@example.com',
+                    role: 'RECRUITER',
+                    workspaceName: 'Acme Tech Workspace',
+                    token: token
+                };
+            }
+            updateUIForRole();
+        }
+
         function onLoginSuccess() {
+            localStorage.setItem('smarthire_user', JSON.stringify(currentUser));
+            updateUIForRole();
             document.getElementById('userInfoDisplay').style.display = 'flex';
             document.getElementById('navUserName').textContent = currentUser.name;
             document.getElementById('navWorkspaceName').textContent = currentUser.workspaceName || 'Acme Tech Workspace';
@@ -2398,6 +3001,15 @@
         }
 
         function handleLogout() {
+            currentUser = null;
+            token = null;
+            localStorage.removeItem('smarthire_token');
+            localStorage.removeItem('smarthire_user');
+            updateUIForRole();
+            closeProfileMenu();
+            showToast("Signed out successfully");
+            activateCandidatePortal();
+            return;
             currentUser = null;
             token = null;
             localStorage.removeItem('smarthire_token');
@@ -2470,6 +3082,9 @@
         }
 
         function loadCandidateQueueScreen() {
+            const candidateBadge = document.getElementById('tabCandidateCount');
+            if (candidateBadge) candidateBadge.textContent = mockCandidates.length;
+
             const select = document.getElementById('candidateJobSelect');
             select.innerHTML = currentJobs.map(j => `<option value="${j.id}">${j.title} (${j.department})</option>`).join('');
             loadCandidateQueue();
@@ -2591,6 +3206,36 @@
                 `).join('');
             } else {
                 evidenceContainer.innerHTML = '<div class="text-sm text-muted">Evidence quotes verified.</div>';
+            }
+
+            
+            // Populate decision options based on current user role
+            const decisionSelect = document.getElementById('reviewRoundDecision');
+            if (decisionSelect) {
+                if (currentUser && currentUser.role === 'RECRUITER') {
+                    decisionSelect.innerHTML = `
+                        <option value="ADVANCE_TO_INTERVIEW">Advance to Recruiter Screen</option>
+                        <option value="ADVANCE_TO_TECHNICAL_ROUND">Advance to Technical Architectural Round</option>
+                        <option value="ON_HOLD">Keep on Talent Hold</option>
+                        <option value="NOT_A_FIT_FOR_ROLE">Decline / Not a Fit for Role</option>
+                    `;
+                } else if (currentUser && currentUser.role === 'HIRING_MANAGER') {
+                    decisionSelect.innerHTML = `
+                        <option value="ADVANCE_TO_FINAL_ROUND">Advance to Final Leadership Round</option>
+                        <option value="EXTEND_OFFER">Extend Official Job Offer</option>
+                        <option value="ON_HOLD">Keep on Talent Hold</option>
+                        <option value="NOT_A_FIT_FOR_ROLE">Decline / Not a Fit for Role</option>
+                    `;
+                } else {
+                    decisionSelect.innerHTML = `
+                        <option value="ADVANCE_TO_INTERVIEW">Advance to Recruiter Screen</option>
+                        <option value="ADVANCE_TO_TECHNICAL_ROUND">Advance to Technical Architectural Round</option>
+                        <option value="ADVANCE_TO_FINAL_ROUND">Advance to Final Leadership Round</option>
+                        <option value="EXTEND_OFFER">Extend Official Job Offer</option>
+                        <option value="ON_HOLD">Keep on Talent Hold</option>
+                        <option value="NOT_A_FIT_FOR_ROLE">Decline / Not a Fit for Role</option>
+                    `;
+                }
             }
 
             document.getElementById('candidateModal').classList.add('active');
@@ -2801,6 +3446,23 @@
 
         // Admin & Taxonomy
         function loadAdminScreen() {
+            const restrictedNotice = document.getElementById('adminRestrictedNotice');
+            const adminContent = document.getElementById('adminContentBody');
+            const roleLabel = document.getElementById('restrictedRoleLabel');
+
+            if (!currentUser || currentUser.role !== 'ADMINISTRATOR') {
+                if (restrictedNotice) restrictedNotice.style.display = 'block';
+                if (adminContent) adminContent.style.display = 'none';
+                if (roleLabel && currentUser) {
+                    roleLabel.textContent = currentUser.role;
+                    roleLabel.className = 'role-pill ' + (currentUser.role === 'HIRING_MANAGER' ? 'role-manager' : 'role-recruiter');
+                }
+                return;
+            }
+
+            if (restrictedNotice) restrictedNotice.style.display = 'none';
+            if (adminContent) adminContent.style.display = 'block';
+
             const container = document.getElementById('taxonomyContainer');
             const sampleSkills = [
                 "Java", "Spring Boot", "Microservices", "PostgreSQL", "Docker", "Kubernetes", "Apache Kafka", "Redis", "JUnit",
